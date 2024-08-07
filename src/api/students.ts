@@ -34,7 +34,6 @@ export async function getStudents() {
         if (request.status === 200) {
             return request.data;
         }      
-        console.log('testee')
     } catch (error) {
         console.log(error)
         return []

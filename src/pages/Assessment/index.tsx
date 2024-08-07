@@ -2,12 +2,17 @@ import React, {useState} from "react"
 import { View, Text, Vibration, TouchableOpacity, Pressable, Keyboard, ScrollView, Alert } from "react-native"
 import tw from 'twrnc'
 import InputForm from "../../components/InputForm"
-import { setStudents, getStudents } from "../../api/students"
+import { setStudents } from "../../api/students"
 
-type response = {
-    status: string
-    data: any
-}
+type ResponseData = {
+    resultado: number;
+    classe: string;
+  };
+  
+type Response = {
+    status: number;
+    data: ResponseData;
+};
 
 export default function Assestment() {
     const [errorMessage, setErrorMessage] = useState('')
@@ -31,7 +36,7 @@ export default function Assestment() {
             Vibration.vibrate()
         } else {
             try {
-                const registerStudentAssesment: any = await setStudents(
+                const registerStudentAssesment = await setStudents(
                     name,
                     parseInt(age),
                     parseInt(gender),
@@ -45,7 +50,7 @@ export default function Assestment() {
                     parseInt(sports),
                     parseInt(music),
                     parseInt(volunteering)
-                ) 
+                ) as Response
     
                 if (registerStudentAssesment.status === 201) {
                     setErrorMessage("")

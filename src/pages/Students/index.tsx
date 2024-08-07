@@ -11,8 +11,6 @@ interface Student {
     grade_class: string
 }
 
-
-
 export default function Students() {
     const [listStudents, setListStudents] = useState<Student[]>([])
 
@@ -54,7 +52,7 @@ export default function Students() {
                                                 Resultado:
                                             </Text>
                                             <Text>
-                                                {item.gpa}
+                                                {item.gpa.toFixed(2)}
                                             </Text>
                                         </View>
                                         <View style={tw`flex-row gap-1`}>
