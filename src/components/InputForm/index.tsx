@@ -16,7 +16,7 @@ export default function InputForm({label, error, onChange, value, placeholder, k
         <View style={tw`mb-3`}>
             <Text style={tw`text-[#008080] font-bold`}>{label}</Text>
             <TextInput
-                style={value != '' ? tw`bg-gray-50 p-3 rounded-full mt-2 text-[14px]` : tw`bg-gray-50 p-3 rounded-full mt-2 text-[10px]`}
+                style={tw`bg-gray-50 p-3 rounded-full mt-2 text-[14px]`}
                 onChangeText={onChange}
                 value={value}
                 placeholder={placeholder}

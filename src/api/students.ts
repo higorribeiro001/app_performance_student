@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export async function setStudents(name: string, age: number, gender: number, ethnicity: number, paramentalEducation: number, studyTimeWeekly: number, absenses: number, tutoring: number, parentalSuporte: number, extracurricular: number, sports: number, music: number, voluteering: number) {
     try {
-        const request = await axios.post('https://0b79-179-162-218-180.ngrok-free.app/student-performance/api/v1/',
+        const request = await axios.post('https://c919-179-162-218-180.ngrok-free.app/student-performance/api/v1/',
             {
                 name: name,
                 age: age,
@@ -30,9 +30,20 @@ export async function setStudents(name: string, age: number, gender: number, eth
 
 export async function getStudents() {
     try {
-        const request = await axios.get('https://0b79-179-162-218-180.ngrok-free.app/student-performance/api/v1/');
+        const request = await axios.get('https://c919-179-162-218-180.ngrok-free.app/student-performance/api/v1/');
         if (request.status === 200) {
             return request.data;
+        }      
+    } catch (error) {
+        return []
+    }
+}
+
+export async function deleteStudents(id: number) {
+    try {
+        const request = await axios.delete(`https://c919-179-162-218-180.ngrok-free.app/student-performance/api/v1/${id}/`);
+        if (request.status === 200) {
+            return request;
         }      
     } catch (error) {
         return []

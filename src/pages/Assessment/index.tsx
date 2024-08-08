@@ -3,6 +3,7 @@ import { View, Text, Vibration, TouchableOpacity, Pressable, Keyboard, ScrollVie
 import tw from 'twrnc'
 import InputForm from "../../components/InputForm"
 import { setStudents } from "../../api/students"
+import SelectDropdown from 'react-native-select-dropdown'
 
 type ResponseData = {
     resultado: number;
@@ -18,20 +19,20 @@ export default function Assestment() {
     const [errorMessage, setErrorMessage] = useState('')
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
-    const [gender, setGender] = useState('')
-    const [ethnicity, setEthnicity] = useState('')
-    const [parentalEducation, setParentalEducation] = useState('')
+    const [gender, setGender] = useState(0)
+    const [ethnicity, setEthnicity] = useState(0)
+    const [parentalEducation, setParentalEducation] = useState(0)
     const [studyTimeWeekly, setStudyTimeWeekly] = useState('')
     const [absences, setAbsences] = useState('')
-    const [tutoring, setTutoring] = useState('')
-    const [parentalSupport, setParentalSupport] = useState('')
-    const [extracurricular, setExtracurricular] = useState('')
-    const [sports, setSports] = useState('')
-    const [music, setMusic] = useState('')
-    const [volunteering, setVolunteering] = useState('')
+    const [tutoring, setTutoring] = useState(0)
+    const [parentalSupport, setParentalSupport] = useState(0)
+    const [extracurricular, setExtracurricular] = useState(0)
+    const [sports, setSports] = useState(0)
+    const [music, setMusic] = useState(0)
+    const [volunteering, setVolunteering] = useState(0)
 
     const handleRegister = async () => {
-        if (name == '' || age == '' || gender == '' || ethnicity == '' || parentalEducation == '' || studyTimeWeekly == '' || absences == '' || tutoring == '' || parentalSupport == '' || extracurricular == '' || sports == '' || music == '' || volunteering == '') {
+        if (name === '' || age === '' || !gender || ethnicity === null || parentalEducation === null || studyTimeWeekly === '' || absences === '' || tutoring === null || parentalSupport === null || extracurricular === null || sports === null || music === null || volunteering === null) {
             setErrorMessage("Campo obrigatório")
             Vibration.vibrate()
         } else {
@@ -39,34 +40,34 @@ export default function Assestment() {
                 const registerStudentAssesment = await setStudents(
                     name,
                     parseInt(age),
-                    parseInt(gender),
-                    parseInt(ethnicity),
-                    parseInt(parentalEducation),
+                    gender,
+                    ethnicity,
+                    parentalEducation,
                     parseFloat(studyTimeWeekly),
                     parseInt(absences),
-                    parseInt(tutoring),
-                    parseInt(parentalSupport),
-                    parseInt(extracurricular),
-                    parseInt(sports),
-                    parseInt(music),
-                    parseInt(volunteering)
+                    tutoring,
+                    parentalSupport,
+                    extracurricular,
+                    sports,
+                    music,
+                    volunteering
                 ) as Response
     
                 if (registerStudentAssesment.status === 201) {
                     setErrorMessage("")
                     setName("")
                     setAge("")
-                    setGender("")
-                    setEthnicity("")
-                    setParentalEducation("")
+                    setGender(0)
+                    setEthnicity(0)
+                    setParentalEducation(0)
                     setStudyTimeWeekly("")
                     setAbsences("")
-                    setTutoring("")
-                    setParentalSupport("")
-                    setExtracurricular("")
-                    setSports("")
-                    setMusic("")
-                    setVolunteering("")
+                    setTutoring(0)
+                    setParentalSupport(0)
+                    setExtracurricular(0)
+                    setSports(0)
+                    setMusic(0)
+                    setVolunteering(0)
                     Alert.alert(
                         'Sucesso',
                         'Registro realizado com sucesso.',
@@ -81,6 +82,89 @@ export default function Assestment() {
         }
     }
 
+    const listSelects = [
+        {
+            label: "Gênero",
+            items: [
+                {title: 'Masculino', value: 0},
+                {title: 'Feminino', value: 1},
+            ],
+            data: 'gender'
+        },
+        {
+            label: "Etnia",
+            items: [
+                {title: 'Caucasian', value: 0},
+                {title: 'Afro-americano', value: 1},
+                {title: 'Asiático', value: 2},
+                {title: 'Outro', value: 3},
+            ],
+            data: 'ethnicity'
+        },
+        {
+            label: "Nível de educação dos pais",
+            items: [
+                {title: 'Nenhum', value: 0},
+                {title: 'Ensino Médio', value: 1},
+                {title: 'Faculdade', value: 2},
+                {title: 'Bacharel', value: 3},
+                {title: 'Superior', value: 4},
+            ],
+            data: 'parentalEducation'
+        },
+        {
+            label: "Tutoria",
+            items: [
+                {title: 'Não', value: 0},
+                {title: 'Sim', value: 1},
+            ],
+            data: 'tutoring'
+        },
+        {
+            label: "Nível de apoio parental",
+            items: [
+                {title: 'Nenhum', value: 0},
+                {title: 'Baixo', value: 1},
+                {title: 'Moderado', value: 2},
+                {title: 'Alto', value: 3},
+                {title: 'Muito Alto', value: 4},
+            ],
+            data: 'parentalSupport'
+        },
+        {
+            label: "Extracurricular",
+            items: [
+                {title: 'Não', value: 0},
+                {title: 'Sim', value: 1},
+            ],
+            data: 'extracurricular'
+        },
+        {
+            label: "Esportes",
+            items: [
+                {title: 'Não', value: 0},
+                {title: 'Sim', value: 1},
+            ],
+            data: 'sports'
+        },
+        {
+            label: "Música",
+            items: [
+                {title: 'Não', value: 0},
+                {title: 'Sim', value: 1},
+            ],
+            data: 'music'
+        },
+        {
+            label: "Voluntariado",
+            items: [
+                {title: 'Não', value: 0},
+                {title: 'Sim', value: 1},
+            ],
+            data: 'volunteering'
+        },
+    ]
+
     return(
         <View>
             <ScrollView
@@ -91,17 +175,59 @@ export default function Assestment() {
                 <Pressable onPress={Keyboard.dismiss}>
                     <InputForm label="Nome" error={errorMessage} onChange={setName} value={name} placeholder="Ex. Higor" keyboardType="default" />
                     <InputForm label="Idade" error={errorMessage} onChange={setAge} value={age} placeholder="Varia de 15 a 18 anos" keyboardType="numeric" />
-                    <InputForm label="Gênero" error={errorMessage} onChange={setGender} value={gender} placeholder="0 para Masculino e 1 para Feminino" keyboardType="numeric" />
-                    <InputForm label="Etnia" error={errorMessage} onChange={setEthnicity} value={ethnicity} placeholder="Ex: 0: Caucasian, 1: Afro-americano, 2: Asiático, 3: Outro" keyboardType="numeric" />
-                    <InputForm label="Nível de educação dos pais" error={errorMessage} onChange={setParentalEducation} value={parentalEducation} placeholder="Ex: 0: Nenhum, 1: Ensino Mé..., 2: Faculdade, 3: Bacharel, 4: Superior" keyboardType="numeric" />
+                    {listSelects.map((item, index) => (
+                        <View 
+                            key={index}
+                            style={tw`mb-3`}
+                        >
+                            <Text style={tw`text-[#008080] font-bold`}>{item.label}</Text>
+                            <SelectDropdown
+                                data={item.items}
+                                onSelect={(selectedItem, index) => {
+                                    if (item.data === "gender") {
+                                        setGender(selectedItem.value);
+                                    } else if (item.data === "ethnicity") {
+                                        setEthnicity(selectedItem.value);
+                                    } else if (item.data === "parentalEducation") {
+                                        setParentalEducation(selectedItem.value)
+                                    } else if (item.data === "tutoring") {
+                                        setTutoring(selectedItem.value)
+                                    } else if (item.data === "parentalSupport") {
+                                        setParentalSupport(selectedItem.value)
+                                    } else if (item.data === "extracurricular") {
+                                        setExtracurricular(selectedItem.value)
+                                    } else if (item.data === "sports") {
+                                        setSports(selectedItem.value)
+                                    } else if (item.data === "music") {
+                                        setMusic(selectedItem.value)
+                                    } else if (item.data === "volunteering") {
+                                        setVolunteering(selectedItem.value)
+                                    }
+                                }}
+                                renderButton={(selectedItem, isOpened) => {
+                                    return (
+                                        <View style={tw`bg-gray-50 p-3 rounded-full mt-2 text-[14px]`}>
+                                            <Text>
+                                                {(selectedItem && selectedItem.title) || 'Selecione...'}
+                                            </Text>
+                                        </View>
+                                    );
+                                    }}
+                                renderItem={(item, index, isSelected) => {
+                                    return (
+                                        <View style={item.value === ethnicity ? tw`bg-[#008080] text-[14px]` : tw`bg-gray-50 text-[14px]`}>
+                                            <Text style={item.value === ethnicity ? tw`p-3 text-[#ffffff]` : tw`p-3`}>{item.title}</Text>
+                                        </View>
+                                    );
+                                }}
+                                showsVerticalScrollIndicator={false}
+                                dropdownStyle={tw`bg-gray-50 text-[14px]`}
+                            />
+                            <Text style={tw`mt-2 text-red-500 font-bold`}>{errorMessage}</Text>
+                        </View>
+                    ))}
                     <InputForm label="Tempo de estudo semanal (horas)" error={errorMessage} onChange={setStudyTimeWeekly} value={studyTimeWeekly} placeholder="Variando de 0 a 20" keyboardType="numeric" />
                     <InputForm label="Ausências" error={errorMessage} onChange={setAbsences} value={absences} placeholder="Variando de 0 a 30" keyboardType="numeric" />
-                    <InputForm label="Tutoria" error={errorMessage} onChange={setTutoring} value={tutoring} placeholder="0 indica Não e 1 indica Sim" keyboardType="numeric" />
-                    <InputForm label="Nível de apoio parental" error={errorMessage} onChange={setParentalSupport} value={parentalSupport} placeholder="Ex: 0: Nenhum, 1: Baixo, 2: Moderado, 3: Alto, 4: Muito alto..." keyboardType="numeric" />
-                    <InputForm label="Extracurricular" error={errorMessage} onChange={setExtracurricular} value={extracurricular} placeholder="0 indica Não e 1 indica Sim" keyboardType="numeric" />
-                    <InputForm label="Esportes" error={errorMessage} onChange={setSports} value={sports} placeholder="0 indica Não e 1 indica Sim" keyboardType="numeric" />
-                    <InputForm label="Música" error={errorMessage} onChange={setMusic} value={music} placeholder="0 indica Não e 1 indica Sim" keyboardType="numeric" />
-                    <InputForm label="Voluntariado" error={errorMessage} onChange={setVolunteering} value={volunteering} placeholder="0 indica Não e 1 indica Sim" keyboardType="numeric" />
                     <TouchableOpacity 
                         onPress={handleRegister}
                         style={tw`bg-[#008080] rounded-full mb-12`}  
