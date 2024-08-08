@@ -28,7 +28,7 @@ ngrok http 8000
 ~~~
 #### No settings.py da api:
 ##### Neste trecho de código: ALLOWED_HOSTS = ["0b79-179-162-218-180.ngrok-free.app", "127.0.0.1"]
-##### Substitua este trecho "0b79-179-162-218-180.ngrok-free.app" pelo novo link gerado pelo ngrok, não esqueça de retirar o http
+##### Substitua este trecho "0b79-179-162-218-180.ngrok-free.app" pelo novo link gerado pelo ngrok, não esqueça de retirar "https//"
 #### No aplicativo, no arquivo de "students.ts" dentro do diretório "src/api":
 ##### Idenfique onde o axios está configurado nas requests como por exemplo: axios.post('https://0b79-179-162-218-180.ngrok-free.app/student-performance/api/v1/'...
 ##### Substitua "https://0b79-179-162-218-180.ngrok-free.app" pelo novo link gerado pelo ngrok, ou configure para rodar variáveis de ambiente e substitua no arquivo ".env"
