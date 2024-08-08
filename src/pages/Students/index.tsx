@@ -54,8 +54,8 @@ export default function Students() {
         <View style={tw`py-3`}>
             {!isLoading ? (
                 <View>
-                    <View style={tw`flex-row justify-between items-center`}>
-                        <Text style={tw`text-[18px] font-bold px-4 py-2`}>Avaliações realizadas:</Text>
+                    <View style={tw`flex-row justify-between items-center px-4`}>
+                        <Text style={tw`text-[18px] font-bold py-2`}>Avaliações realizadas:</Text>
                         <TouchableOpacity
                             style={tw`bg-transparent`}
                             onPress={fetchData}
