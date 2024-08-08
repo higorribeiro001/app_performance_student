@@ -30,6 +30,7 @@ export default function Students() {
                 <View>
                     <Text style={tw`text-[18px] font-bold px-4 py-2`}>Avaliações realizadas:</Text>
                     <FlatList
+                        style={tw`h-[94%]`}
                         showsVerticalScrollIndicator={false}
                         data={listStudents}
                         renderItem={({item}) => {
